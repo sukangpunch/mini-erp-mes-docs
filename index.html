@@ -86,9 +86,15 @@
   .doc table { border-collapse: collapse; width: 100%; font-size: 14.5px; line-height: 1.6; }
   .doc th { text-align: left; font-weight: 600; font-size: 13px; color: var(--muted); border-bottom: 2px solid var(--line); padding: 8px 12px 8px 0; white-space: nowrap; }
   .doc td { border-bottom: 1px solid var(--line); padding: 9px 12px 9px 0; vertical-align: top; }
+  /* 첫 칸의 짧은 낱말이 좁은 칸에서 꺾이지 않게 한다. 긴 문장이 든 첫 칸은 폭을 넘으면 그대로 꺾인다. */
+  .doc td:first-child { min-width: 3.5em; }
   .doc .mermaid { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin: 0 0 20px; overflow-x: auto; text-align: center; }
   .anchor { margin-left: 8px; color: var(--line); font-weight: 400; visibility: hidden; }
   h2:hover .anchor, h3:hover .anchor { visibility: visible; }
+  .doc .footnotes { margin-top: 48px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+  .doc .footnotes h2 { font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; border: 0; margin: 12px 0 8px; padding: 0; color: var(--muted); }
+  .doc .footnotes a { word-break: break-all; }
+  .doc sup a { font-size: 11px; padding: 0 1px; }
   .source { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
 
   /* 홈 */
@@ -155,7 +161,7 @@
 
 <template id="home">
   <h1>mini-erp-mes</h1>
-  <p class="lead">가상의 자동차 외장 플라스틱 부품 협력사를 대상으로 한 미니 ERP/MES와 운영 에이전트입니다. 사출성형으로 성형품을 찍어 내고, 조립해서 출하하는 공장을 다룹니다.</p>
+  <p class="lead">주문에서 설비까지 이어지는 ERP와 MES의 구조를 작게 직접 만들고, 그 위에 사람의 승인을 거쳐야만 무언가를 바꿀 수 있는 운영 에이전트를 올린 프로젝트입니다. 구체적인 예로, 사출성형으로 플라스틱 부품을 찍어 내고 조립해서 출하하는 가상의 공장을 다룹니다.</p>
   <div class="notice">모든 데이터는 시뮬레이터가 만든 생성 데이터입니다. 실제 공장의 데이터가 아닙니다.</div>
 
   <div class="facts">
@@ -174,6 +180,8 @@
 
   <h2>어디부터 읽나</h2>
   <div class="cards">
+    <a class="card" href="#/background"><b>배경</b><span>왜 만들었는지를 실제 자료와 출처로 설명합니다.</span></a>
+    <a class="card" href="#/erp-mes-sap"><b>ERP, MES, SAP란</b><span>세 가지가 무엇이고 서로 어떻게 이어지는지, 이 프로젝트의 무엇에 해당하는지.</span></a>
     <a class="card" href="#/factory-flow"><b>공장 흐름</b><span>주문 하나를 수주부터 출하까지 따라갑니다.</span></a>
     <a class="card" href="#/ontology"><b>온톨로지</b><span>같은 개념이 DB, API, 도구, 메시지에서 각각 무엇인지 눌러 봅니다.</span></a>
     <a class="card" href="#/contracts"><b>계층 사이 계약</b><span>구성 요소들이 무엇을 주고받는지의 목록입니다.</span></a>
@@ -207,6 +215,8 @@
 </template>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/18.3.0/lib/marked.umd.js"></script>
+<!-- 각주([^이름])를 그린다. 출처를 각주로 다는 문서가 있다. -->
+<script src="https://cdn.jsdelivr.net/npm/marked-footnote@1.4.0/dist/index.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/12.3.0/mermaid.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.35.0/cytoscape.min.js"></script>
 <script>
@@ -217,6 +227,16 @@ var toc = document.getElementById("toc");
 var cache = {};
 
 mermaid.initialize({ startOnLoad: false, theme: "neutral", securityLevel: "loose" });
+if (window.markedFootnote) marked.use(markedFootnote({ description: "각주" }));
+
+// 쪽 안의 닻 링크(각주 등)는 주소를 바꾸지 않고 그 자리로 옮긴다. 주소의 # 은 쪽을 고르는 데 쓰기 때문이다.
+doc.addEventListener("click", function (event) {
+  var link = event.target.closest("a[href^='#']");
+  if (!link || link.getAttribute("href").indexOf("#/") === 0) return;
+  event.preventDefault();
+  var target = document.getElementById(decodeURIComponent(link.getAttribute("href").slice(1)));
+  if (target) target.scrollIntoView();
+});
 
 function load(page) {
   if (cache[page.file]) return Promise.resolve(cache[page.file]);

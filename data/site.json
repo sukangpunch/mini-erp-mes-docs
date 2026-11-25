@@ -7,6 +7,12 @@
      "id": "",
      "title": "홈",
      "template": "home"
+    },
+    {
+     "id": "background",
+     "title": "배경",
+     "source": "docs/domain/background.md",
+     "file": "pages/background.md"
     }
    ]
   },
@@ -18,6 +24,12 @@
      "title": "공장 흐름",
      "source": "docs/domain/factory-flow.md",
      "file": "pages/factory-flow.md"
+    },
+    {
+     "id": "erp-mes-sap",
+     "title": "ERP, MES, SAP란",
+     "source": "docs/domain/erp-mes-sap.md",
+     "file": "pages/erp-mes-sap.md"
     },
     {
      "id": "glossary",
