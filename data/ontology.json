@@ -1,0 +1,1060 @@
+{
+ "nodes": [
+  {
+   "id": "Item",
+   "ko": "품목",
+   "description": "사고, 만들고, 파는 모든 물건. 원자재(수지, 마스터배치, 클립), 반제품(성형품), 완제품이 있다.",
+   "isa95": "Material Definition",
+   "group": "기준정보",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "item",
+    "bom",
+    "item_replenishment"
+   ],
+   "api": [
+    "GET /api/items"
+   ],
+   "mcp_tools": [],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "item",
+    "bom",
+    "item_replenishment"
+   ]
+  },
+  {
+   "id": "Line",
+   "ko": "라인",
+   "description": "같은 종류의 일을 하는 설비의 묶음. 사출 라인과 조립 라인이 있다. 라인 자체는 메시지를 보내지 않는다.",
+   "isa95": "Production Line (Work Center 의 한 종류)",
+   "group": "기준정보",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "line"
+   ],
+   "api": [
+    "GET /api/lines",
+    "GET /api/dashboard/lines"
+   ],
+   "mcp_tools": [
+    "list_equipment",
+    "get_defect_summary"
+   ],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "line"
+   ]
+  },
+  {
+   "id": "Equipment",
+   "ko": "설비",
+   "description": "기계 한 대. 사출성형기 14대와 조립 설비 6대. 메시지를 보내는 주체다.",
+   "isa95": "Work Cell (Work Unit 의 한 종류)",
+   "group": "기준정보",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "equipment"
+   ],
+   "api": [
+    "GET /api/equipment",
+    "GET /api/equipment/{code}"
+   ],
+   "mcp_tools": [
+    "list_equipment"
+   ],
+   "mqtt": [
+    "factory/{equipment}/connection"
+   ],
+   "sse": [
+    "equipment.connection"
+   ],
+   "built_tables": [
+    "equipment"
+   ]
+  },
+  {
+   "id": "Mold",
+   "ko": "금형",
+   "description": "품목의 형상을 만드는 틀. 한 사이클에 나오는 개수(캐비티 수)와 예상 수율을 가진다. 조립의 받침대(지그)도 여기에 속한다.",
+   "isa95": "Physical Asset",
+   "group": "기준정보",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "mold",
+    "mold_equipment"
+   ],
+   "api": [
+    "GET /api/molds"
+   ],
+   "mcp_tools": [],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "mold",
+    "mold_equipment"
+   ]
+  },
+  {
+   "id": "WorkCalendar",
+   "ko": "작업 달력",
+   "description": "공장이 언제 도는지. 교대(주간 06~14시, 오후 14~22시)와 근무일.",
+   "isa95": null,
+   "group": "기준정보",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "shift",
+    "work_calendar"
+   ],
+   "api": [],
+   "mcp_tools": [],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "shift",
+    "work_calendar"
+   ]
+  },
+  {
+   "id": "Customer",
+   "ko": "고객",
+   "description": "완제품을 주문하는 회사.",
+   "isa95": null,
+   "group": "기준정보",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "customer"
+   ],
+   "api": [],
+   "mcp_tools": [],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "customer"
+   ]
+  },
+  {
+   "id": "Supplier",
+   "ko": "공급사",
+   "description": "원자재를 납품하는 회사.",
+   "isa95": null,
+   "group": "기준정보",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "supplier"
+   ],
+   "api": [],
+   "mcp_tools": [],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "supplier"
+   ]
+  },
+  {
+   "id": "SalesOrder",
+   "ko": "수주",
+   "description": "고객의 주문. 머리(누가 언제)와 줄(무엇을 몇 개 언제까지)로 나뉜다. 납기는 줄마다 있다.",
+   "isa95": null,
+   "group": "영업과 계획",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "sales_order",
+    "sales_order_line"
+   ],
+   "api": [
+    "GET /api/sales-orders",
+    "GET /api/sales-orders/{orderNo}",
+    "POST /api/sales-orders"
+   ],
+   "mcp_tools": [
+    "get_sales_order",
+    "get_delivery_risk"
+   ],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "sales_order",
+    "sales_order_line"
+   ]
+  },
+  {
+   "id": "StockReservation",
+   "ko": "예약",
+   "description": "창고의 재고 일부를 특정 수주 줄 몫으로 잡아 둔 것. 계획할 때 있던 재고를 잡기도 하고, 그 줄을 위해 생산한 것이 입고될 때 잡기도 한다.",
+   "isa95": null,
+   "group": "영업과 계획",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "stock_reservation"
+   ],
+   "api": [],
+   "mcp_tools": [
+    "get_sales_order",
+    "get_stock"
+   ],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "stock_reservation"
+   ]
+  },
+  {
+   "id": "ProductionOrder",
+   "ko": "생산오더",
+   "description": "무엇을 몇 개 만들 것인가. 수주 줄 하나에 완제품용과 성형품용이 하나씩 생긴다. 필요한 양품 수량을 채울 때까지 열려 있다.",
+   "isa95": "Operations Request (Part 2)",
+   "group": "영업과 계획",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "production_order"
+   ],
+   "api": [],
+   "mcp_tools": [
+    "get_sales_order",
+    "get_delivery_risk"
+   ],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "production_order"
+   ]
+  },
+  {
+   "id": "WorkOrder",
+   "ko": "작업지시",
+   "description": "어느 설비에서 어느 금형으로 어느 날 몇 개. 하루 단위이고 밤을 넘기지 않는다. core 가 설비에 내려보낸다.",
+   "isa95": "Job Order (Part 4)",
+   "group": "영업과 계획",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "work_order"
+   ],
+   "api": [
+    "GET /api/work-orders"
+   ],
+   "mcp_tools": [
+    "list_work_orders",
+    "preview_work_order_change",
+    "propose_work_order_change"
+   ],
+   "mqtt": [
+    "factory/{equipment}/order"
+   ],
+   "sse": [
+    "work-order.updated",
+    "work-order.progress"
+   ],
+   "built_tables": [
+    "work_order"
+   ]
+  },
+  {
+   "id": "EquipmentStatus",
+   "ko": "설비 상태",
+   "description": "설비가 언제부터 언제까지 가동, 대기, 셋업, 고장, 비가동이었는가. 시간가동률의 근거.",
+   "isa95": null,
+   "group": "생산 실행",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "equipment_status_log"
+   ],
+   "api": [],
+   "mcp_tools": [
+    "get_equipment_status_history",
+    "list_equipment"
+   ],
+   "mqtt": [
+    "factory/{equipment}/status"
+   ],
+   "sse": [
+    "equipment.status",
+    "alarm.raised"
+   ],
+   "built_tables": [
+    "equipment_status_log"
+   ]
+  },
+  {
+   "id": "Cycle",
+   "ko": "사이클",
+   "description": "설비가 한 번 찍거나 한 번 끼운 것. 공정값(온도, 압력, 사출 속도, 충전 시간)을 담는다. 불량 여부와 자재 LOT 는 담지 않는다. 가장 많이 쌓인다.",
+   "isa95": null,
+   "group": "생산 실행",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "cycle_log"
+   ],
+   "api": [],
+   "mcp_tools": [
+    "get_process_trend"
+   ],
+   "mqtt": [
+    "factory/{equipment}/cycle"
+   ],
+   "sse": [],
+   "built_tables": [
+    "cycle_log"
+   ]
+  },
+  {
+   "id": "Telemetry",
+   "ko": "계측값",
+   "description": "설비가 2초마다 보내는 지금 이 순간의 값. 화면으로 흘려보내고 1분 단위의 평균, 최솟값, 최댓값만 저장한다. 놓쳐도 되는 데이터다.",
+   "isa95": null,
+   "group": "생산 실행",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "equipment_telemetry_1m"
+   ],
+   "api": [
+    "GET /api/equipment/{code}"
+   ],
+   "mcp_tools": [
+    "get_telemetry_trend"
+   ],
+   "mqtt": [
+    "factory/{equipment}/telemetry"
+   ],
+   "sse": [
+    "equipment.telemetry"
+   ],
+   "built_tables": [
+    "equipment_telemetry_1m"
+   ]
+  },
+  {
+   "id": "DefectRecord",
+   "ko": "불량 기록",
+   "description": "검사에서 발견한 불량. 언제, 어느 작업지시에서, 어떤 유형이, 몇 개. 설비는 불량을 모르므로 사이클과 따로 기록한다. 유형에는 미성형, 은줄, 버, 싱크마크, 웰드라인, 초기허용불량이 있다.",
+   "isa95": null,
+   "group": "생산 실행",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "defect_record",
+    "defect_type"
+   ],
+   "api": [],
+   "mcp_tools": [
+    "get_defect_summary",
+    "get_defect_timeline"
+   ],
+   "mqtt": [
+    "factory/{equipment}/inspection"
+   ],
+   "sse": [
+    "defect.recorded",
+    "alarm.raised"
+   ],
+   "built_tables": [
+    "defect_record",
+    "defect_type"
+   ]
+  },
+  {
+   "id": "ProductionResult",
+   "ko": "생산실적",
+   "description": "작업지시와 교대 단위로 집계한 양품과 불량 수량. 사이클 수 x 금형의 칸 수에서 불량을 뺀다. 1분마다 다시 계산하고 마감되면 재고에 반영한다.",
+   "isa95": "Job Response (Part 4)",
+   "group": "생산 실행",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "production_result"
+   ],
+   "api": [
+    "GET /api/dashboard/lines"
+   ],
+   "mcp_tools": [
+    "list_work_orders",
+    "get_delivery_risk"
+   ],
+   "mqtt": [],
+   "sse": [
+    "work-order.progress"
+   ],
+   "built_tables": [
+    "production_result"
+   ]
+  },
+  {
+   "id": "PurchaseOrder",
+   "ko": "자재 주문",
+   "description": "원자재의 쓸 수 있는 재고가 재주문점 아래로 내려가서 낸 주문. 리드타임 뒤에 도착한다.",
+   "isa95": null,
+   "group": "자재와 재고",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "purchase_order"
+   ],
+   "api": [],
+   "mcp_tools": [],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "purchase_order"
+   ]
+  },
+  {
+   "id": "MaterialLot",
+   "ko": "자재 LOT",
+   "description": "한 번에 들어온 원자재 묶음. 추적의 단위. 불량 원인의 후보가 된다.",
+   "isa95": "Material Lot",
+   "group": "자재와 재고",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "material_lot"
+   ],
+   "api": [],
+   "mcp_tools": [
+    "get_material_charges"
+   ],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "material_lot"
+   ]
+  },
+  {
+   "id": "MaterialCharge",
+   "ko": "자재 투입",
+   "description": "어느 설비에 어느 LOT 를 언제 얼마나 부었는가. 작업지시가 아니라 설비에 붙는다. 사이클과 불량을 LOT 와 잇는 고리다.",
+   "isa95": "Material Actual",
+   "group": "자재와 재고",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "material_charge"
+   ],
+   "api": [],
+   "mcp_tools": [
+    "get_material_charges"
+   ],
+   "mqtt": [
+    "factory/{equipment}/charge"
+   ],
+   "sse": [],
+   "built_tables": [
+    "material_charge"
+   ]
+  },
+  {
+   "id": "Stock",
+   "ko": "재고",
+   "description": "품목별 현재고와 그것을 바꾼 이동의 기록. 쓸 수 있는 재고는 현재고에서 예약을 뺀 것이다. 이동의 종류는 자재 입고, 자재 투입, 생산 입고, 조립 사용, 출하다.",
+   "isa95": null,
+   "group": "자재와 재고",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "stock_balance",
+    "stock_movement"
+   ],
+   "api": [
+    "GET /api/stock",
+    "GET /api/stock/{item}/movements"
+   ],
+   "mcp_tools": [
+    "get_stock",
+    "get_delivery_risk"
+   ],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "stock_balance",
+    "stock_movement"
+   ]
+  },
+  {
+   "id": "Shipment",
+   "ko": "출하",
+   "description": "완제품을 고객에게 보낸 기록. 수주 줄 하나를 여러 번에 나눠 보낼 수 있다.",
+   "isa95": null,
+   "group": "자재와 재고",
+   "planned": false,
+   "planned_stage": null,
+   "tables": [
+    "shipment"
+   ],
+   "api": [],
+   "mcp_tools": [
+    "get_sales_order"
+   ],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": [
+    "shipment"
+   ]
+  },
+  {
+   "id": "ChangeRequest",
+   "ko": "변경안",
+   "description": "에이전트가 올린 작업지시 변경안과 사전 검증 결과, 승인 기록. 승인된 변경안만 실행된다.",
+   "isa95": null,
+   "group": "아직 ERD 에 없는 것",
+   "planned": true,
+   "planned_stage": 3,
+   "tables": [],
+   "api": [
+    "GET /api/change-requests",
+    "GET /api/change-requests/{id}",
+    "POST /api/change-requests/{id}/approve",
+    "POST /api/change-requests/{id}/reject"
+   ],
+   "mcp_tools": [
+    "propose_work_order_change",
+    "execute_change"
+   ],
+   "mqtt": [],
+   "sse": [
+    "change-request.updated"
+   ],
+   "built_tables": []
+  },
+  {
+   "id": "Document",
+   "ko": "문서",
+   "description": "설비 매뉴얼과 작업표준서. 에이전트가 원인을 설명할 때 근거로 찾는다.",
+   "isa95": null,
+   "group": "아직 ERD 에 없는 것",
+   "planned": true,
+   "planned_stage": 4,
+   "tables": [],
+   "api": [],
+   "mcp_tools": [
+    "search_documents"
+   ],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": []
+  },
+  {
+   "id": "Incident",
+   "ko": "사건",
+   "description": "시뮬레이터가 일부러 일으킨 문제(설비 고장, 불량 LOT). 정답지에 기록하고 평가셋의 정답으로 쓴다. 에이전트는 이 기록을 볼 수 없다.",
+   "isa95": null,
+   "group": "아직 ERD 에 없는 것",
+   "planned": true,
+   "planned_stage": 2,
+   "tables": [],
+   "api": [
+    "POST /api/demo/incidents"
+   ],
+   "mcp_tools": [],
+   "mqtt": [],
+   "sse": [],
+   "built_tables": []
+  }
+ ],
+ "edges": [
+  {
+   "from": "Item",
+   "to": "Item",
+   "name": "composedOf",
+   "ko": "이 품목 1개를 만드는 데 드는 하위 품목과 양",
+   "via": "bom"
+  },
+  {
+   "from": "Item",
+   "to": "Supplier",
+   "name": "replenishedFrom",
+   "ko": "원자재가 재주문점 아래로 내려가면 주문하는 곳",
+   "via": "item_replenishment"
+  },
+  {
+   "from": "Line",
+   "to": "Equipment",
+   "name": "has",
+   "ko": "라인에 속한 설비",
+   "via": null
+  },
+  {
+   "from": "Equipment",
+   "to": "Line",
+   "name": "belongsTo",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "Equipment",
+   "to": "Mold",
+   "name": "canMount",
+   "ko": "이 설비에 올릴 수 있는 금형과 그때의 표준 사이클 타임",
+   "via": "mold_equipment"
+  },
+  {
+   "from": "Mold",
+   "to": "Item",
+   "name": "makes",
+   "ko": "이 금형이 만드는 품목",
+   "via": null
+  },
+  {
+   "from": "Mold",
+   "to": "Equipment",
+   "name": "mountableOn",
+   "ko": "",
+   "via": "mold_equipment"
+  },
+  {
+   "from": "Customer",
+   "to": "SalesOrder",
+   "name": "places",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "Supplier",
+   "to": "MaterialLot",
+   "name": "supplies",
+   "ko": "",
+   "via": "purchase_order"
+  },
+  {
+   "from": "SalesOrder",
+   "to": "Customer",
+   "name": "orderedBy",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "SalesOrder",
+   "to": "Item",
+   "name": "requests",
+   "ko": "줄마다 주문한 완제품",
+   "via": null
+  },
+  {
+   "from": "SalesOrder",
+   "to": "StockReservation",
+   "name": "filledBy",
+   "ko": "재고에서 채우는 몫과 생산해서 채우는 몫",
+   "via": null
+  },
+  {
+   "from": "SalesOrder",
+   "to": "ProductionOrder",
+   "name": "drives",
+   "ko": "새로 만들어야 하는 수량",
+   "via": null
+  },
+  {
+   "from": "SalesOrder",
+   "to": "Shipment",
+   "name": "deliveredBy",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "StockReservation",
+   "to": "SalesOrder",
+   "name": "holdsFor",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "StockReservation",
+   "to": "Stock",
+   "name": "holds",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "ProductionOrder",
+   "to": "SalesOrder",
+   "name": "fulfills",
+   "ko": "어느 수주 줄 때문에 만드는가",
+   "via": null
+  },
+  {
+   "from": "ProductionOrder",
+   "to": "ProductionOrder",
+   "name": "feeds",
+   "ko": "성형품 생산오더가 그것을 쓰는 조립 생산오더를 가리킴",
+   "via": null
+  },
+  {
+   "from": "ProductionOrder",
+   "to": "Item",
+   "name": "produces",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "ProductionOrder",
+   "to": "WorkOrder",
+   "name": "splitInto",
+   "ko": "하루 단위의 일감으로 나뉨",
+   "via": null
+  },
+  {
+   "from": "WorkOrder",
+   "to": "ProductionOrder",
+   "name": "partOf",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "WorkOrder",
+   "to": "Equipment",
+   "name": "assignedTo",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "WorkOrder",
+   "to": "Mold",
+   "name": "uses",
+   "ko": "금형과 설비의 조합은 올릴 수 있는 것이어야 함",
+   "via": null
+  },
+  {
+   "from": "EquipmentStatus",
+   "to": "Equipment",
+   "name": "of",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "EquipmentStatus",
+   "to": "WorkOrder",
+   "name": "during",
+   "ko": "작업 중에 일어난 상태면 그 작업지시",
+   "via": null
+  },
+  {
+   "from": "Cycle",
+   "to": "Equipment",
+   "name": "by",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "Cycle",
+   "to": "WorkOrder",
+   "name": "for",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "Cycle",
+   "to": "MaterialCharge",
+   "name": "usedLot",
+   "ko": "같은 설비에서 그 시각 이전에 마지막으로 부은 투입 기록으로 찾는다",
+   "via": null
+  },
+  {
+   "from": "Telemetry",
+   "to": "Equipment",
+   "name": "of",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "DefectRecord",
+   "to": "WorkOrder",
+   "name": "foundIn",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "DefectRecord",
+   "to": "Equipment",
+   "name": "at",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "DefectRecord",
+   "to": "MaterialCharge",
+   "name": "underLot",
+   "ko": "발견 시각으로 그때 쓰던 LOT 를 찾는다",
+   "via": null
+  },
+  {
+   "from": "ProductionResult",
+   "to": "WorkOrder",
+   "name": "of",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "ProductionResult",
+   "to": "Cycle",
+   "name": "computedFrom",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "ProductionResult",
+   "to": "DefectRecord",
+   "name": "minus",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "ProductionResult",
+   "to": "Stock",
+   "name": "posts",
+   "ko": "마감될 때 생산 입고 이동을 만든다",
+   "via": null
+  },
+  {
+   "from": "PurchaseOrder",
+   "to": "Item",
+   "name": "orders",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "PurchaseOrder",
+   "to": "Supplier",
+   "name": "from",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "PurchaseOrder",
+   "to": "MaterialLot",
+   "name": "arrivesAs",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "MaterialLot",
+   "to": "Item",
+   "name": "of",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "MaterialLot",
+   "to": "PurchaseOrder",
+   "name": "receivedBy",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "MaterialCharge",
+   "to": "Equipment",
+   "name": "into",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "MaterialCharge",
+   "to": "MaterialLot",
+   "name": "from",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "MaterialCharge",
+   "to": "Stock",
+   "name": "reduces",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "Stock",
+   "to": "Item",
+   "name": "of",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "Stock",
+   "to": "PurchaseOrder",
+   "name": "changedBy",
+   "ko": "이동마다 원인이 하나 있다",
+   "via": null
+  },
+  {
+   "from": "Stock",
+   "to": "MaterialCharge",
+   "name": "changedBy",
+   "ko": "이동마다 원인이 하나 있다",
+   "via": null
+  },
+  {
+   "from": "Stock",
+   "to": "WorkOrder",
+   "name": "changedBy",
+   "ko": "이동마다 원인이 하나 있다",
+   "via": null
+  },
+  {
+   "from": "Stock",
+   "to": "Shipment",
+   "name": "changedBy",
+   "ko": "이동마다 원인이 하나 있다",
+   "via": null
+  },
+  {
+   "from": "Shipment",
+   "to": "SalesOrder",
+   "name": "for",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "Shipment",
+   "to": "Stock",
+   "name": "reduces",
+   "ko": "",
+   "via": null
+  },
+  {
+   "from": "ChangeRequest",
+   "to": "WorkOrder",
+   "name": "changes",
+   "ko": "",
+   "via": null
+  }
+ ],
+ "actions": {
+  "RegisterSalesOrder": {
+   "ko": "수주 등록",
+   "description": "수주를 등록한다. 수요 생성 배치가 매일 하고, 사람이 화면에서 할 수도 있다.",
+   "on": "SalesOrder",
+   "api": "POST /api/sales-orders",
+   "role": "production_manager",
+   "approval": "불필요"
+  },
+  "RescheduleWorkOrder": {
+   "ko": "작업지시 일정 변경",
+   "description": "작업지시의 날짜나 설비를 바꾼다. 에이전트가 영향을 미리 계산하고 변경안을 올리면, 사람이 승인한 뒤에 실행된다.",
+   "on": "WorkOrder",
+   "role": "production_manager",
+   "approval": "필요",
+   "steps": [
+    {
+     "step": "미리보기",
+     "mcp_tool": "preview_work_order_change",
+     "by": "agent",
+     "ko": "실행하지 않고 영향만 계산. 납기",
+     "설비와 금형의 시간 겹침": null,
+     "금형과 설비의 조합": null,
+     "자재 가용량": null
+    },
+    {
+     "step": "변경안 등록",
+     "mcp_tool": "propose_work_order_change",
+     "by": "agent"
+    },
+    {
+     "step": "승인 또는 거절",
+     "api": "POST /api/change-requests/{id}/approve",
+     "by": "human",
+     "ko": "도구가 아니다. 에이전트는 승인할 수 없다"
+    },
+    {
+     "step": "실행",
+     "mcp_tool": "execute_change",
+     "by": "agent",
+     "ko": "승인 기록이 없으면 MCP 서버가 거부한다"
+    }
+   ],
+   "not_included": "수량 변경과 작업지시 취소는 넣지 않았다. 다른 구현이 끝난 뒤 다시 본다."
+  },
+  "InjectIncident": {
+   "ko": "사건 주입",
+   "description": "시연을 위해 설비 고장이나 불량 LOT 를 일으킨다. 화면의 버튼으로만 하고 에이전트의 도구에는 없다.",
+   "on": "Incident",
+   "api": "POST /api/demo/incidents",
+   "role": "demo",
+   "approval": "불필요"
+  }
+ },
+ "messages": {
+  "cycle": {
+   "topic": "factory/{equipment}/cycle",
+   "from": "equipment",
+   "qos": 1,
+   "retained": false,
+   "kind": "사건",
+   "object": "Cycle"
+  },
+  "status": {
+   "topic": "factory/{equipment}/status",
+   "from": "equipment",
+   "qos": 1,
+   "retained": false,
+   "kind": "사건",
+   "object": "EquipmentStatus"
+  },
+  "inspection": {
+   "topic": "factory/{equipment}/inspection",
+   "from": "equipment",
+   "qos": 1,
+   "retained": false,
+   "kind": "사건",
+   "object": "DefectRecord"
+  },
+  "charge": {
+   "topic": "factory/{equipment}/charge",
+   "from": "equipment",
+   "qos": 1,
+   "retained": false,
+   "kind": "사건",
+   "object": "MaterialCharge"
+  },
+  "telemetry": {
+   "topic": "factory/{equipment}/telemetry",
+   "from": "equipment",
+   "qos": 0,
+   "retained": false,
+   "kind": "계측값",
+   "object": "Telemetry"
+  },
+  "connection": {
+   "topic": "factory/{equipment}/connection",
+   "from": "equipment",
+   "qos": 1,
+   "retained": true,
+   "kind": "사건",
+   "object": "Equipment"
+  },
+  "order": {
+   "topic": "factory/{equipment}/order",
+   "from": "core",
+   "qos": 1,
+   "retained": true,
+   "kind": "지시",
+   "object": "WorkOrder"
+  }
+ },
+ "roles": {
+  "viewer": {
+   "ko": "조회 전용",
+   "can": "조회 도구와 조회 API"
+  },
+  "production_manager": {
+   "ko": "생산 관리자",
+   "can": "조회에 더해 변경안 등록과 실행, 변경안 승인과 거절, 수주 수동 등록"
+  },
+  "demo": {
+   "ko": "데모 계정",
+   "can": "에이전트 대화와 사건 주입. 호출 횟수 제한이 걸린다"
+  }
+ }
+}

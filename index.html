@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mini-erp-mes 문서</title>
+<!--
+  문서 사이트의 틀. 빌드 도구 없이 방문자의 브라우저가 마크다운을 받아 그 자리에서 그린다.
+  이 파일이 목차, 검색, 모양을 맡는다. 목차와 숫자는 data/site.json 에서, 쪽은 pages/ 의 마크다운에서 온다.
+  둘 다 build.py 가 저장소의 원본에서 모은 것이다. 설명은 docs-site/README.md 에 있다.
+-->
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --panel: #f3f1ec;
+    --text: #23262b;
+    --muted: #6b7078;
+    --line: #e2dfd8;
+    --accent: #2f6f6a;
+    --accent-soft: #e3efed;
+    --code-bg: #f1eee8;
+    --note: #f6f1e1;
+    --note-line: #c9a94a;
+    --serif: "Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17191c; --panel: #1e2125; --text: #e4e2dc; --muted: #9a9ea6; --line: #2e3237;
+      --accent: #7cc4bd; --accent-soft: #20302f; --code-bg: #22262b; --note: #2a2618; --note-line: #a88c3a;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17191c; --panel: #1e2125; --text: #e4e2dc; --muted: #9a9ea6; --line: #2e3237;
+    --accent: #7cc4bd; --accent-soft: #20302f; --code-bg: #22262b; --note: #2a2618; --note-line: #a88c3a;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .layout { display: grid; grid-template-columns: 260px minmax(0, 1fr) 220px; max-width: 1320px; margin: 0 auto; min-height: 100vh; }
+
+  /* 왼쪽 목차 */
+  .side { border-right: 1px solid var(--line); padding: 28px 20px 40px 28px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+  .brand { font-family: var(--serif); font-size: 21px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+  .brand small { display: block; font-family: var(--sans); font-size: 12px; font-weight: 400; color: var(--muted); margin-top: 2px; letter-spacing: 0; }
+  .search { margin: 22px 0 18px; position: relative; }
+  .search input { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--text); font: inherit; font-size: 14px; }
+  .search input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+  .results { position: absolute; left: 0; right: 0; top: 42px; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 6px 20px rgba(0,0,0,.08); z-index: 5; max-height: 320px; overflow-y: auto; }
+  .results a { display: block; padding: 8px 10px; font-size: 13px; color: var(--text); border-bottom: 1px solid var(--line); }
+  .results a:last-child { border-bottom: 0; }
+  .results a small { display: block; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .results a:hover { background: var(--panel); text-decoration: none; }
+  .nav h4 { margin: 20px 0 6px; font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; }
+  .nav a { display: block; padding: 4px 10px; margin-left: -10px; border-radius: 5px; color: var(--text); font-size: 14.5px; }
+  .nav a:hover { background: var(--panel); text-decoration: none; }
+  .nav a.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .side-foot { margin-top: 28px; font-size: 12px; color: var(--muted); }
+  .side-foot button { border: 1px solid var(--line); background: none; color: var(--muted); border-radius: 5px; padding: 3px 8px; font: inherit; font-size: 12px; cursor: pointer; }
+
+  /* 본문 */
+  main { padding: 44px 56px 96px; min-width: 0; }
+  .doc { max-width: 760px; }
+  .doc h1 { font-family: var(--serif); font-size: 34px; line-height: 1.3; margin: 0 0 18px; letter-spacing: -0.02em; font-weight: 600; }
+  .doc h2 { font-family: var(--serif); font-size: 23px; margin: 52px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-weight: 600; letter-spacing: -0.01em; }
+  .doc h3 { font-size: 17.5px; margin: 34px 0 8px; font-weight: 650; }
+  .doc h4 { font-size: 15px; margin: 24px 0 6px; color: var(--muted); }
+  .doc p { margin: 0 0 16px; }
+  .doc ul, .doc ol { padding-left: 22px; margin: 0 0 16px; }
+  .doc li { margin: 4px 0; }
+  .doc code { font-family: var(--mono); font-size: 0.86em; background: var(--code-bg); padding: 1.5px 5px; border-radius: 4px; }
+  .doc pre { background: var(--code-bg); padding: 14px 16px; border-radius: 8px; overflow-x: auto; line-height: 1.6; font-size: 13.5px; }
+  .doc pre code { background: none; padding: 0; font-size: inherit; }
+  .doc blockquote { margin: 0 0 16px; padding: 10px 16px; background: var(--note); border-left: 3px solid var(--note-line); border-radius: 0 6px 6px 0; }
+  .doc blockquote p:last-child { margin-bottom: 0; }
+  .doc hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+  .doc img { max-width: 100%; }
+  .table-wrap { overflow-x: auto; margin: 0 0 20px; }
+  .doc table { border-collapse: collapse; width: 100%; font-size: 14.5px; line-height: 1.6; }
+  .doc th { text-align: left; font-weight: 600; font-size: 13px; color: var(--muted); border-bottom: 2px solid var(--line); padding: 8px 12px 8px 0; white-space: nowrap; }
+  .doc td { border-bottom: 1px solid var(--line); padding: 9px 12px 9px 0; vertical-align: top; }
+  .doc .mermaid { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin: 0 0 20px; overflow-x: auto; text-align: center; }
+  .anchor { margin-left: 8px; color: var(--line); font-weight: 400; visibility: hidden; }
+  h2:hover .anchor, h3:hover .anchor { visibility: visible; }
+  .source { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+
+  /* 홈 */
+  .lead { font-size: 18.5px; color: var(--muted); line-height: 1.8; margin-bottom: 26px; }
+  .notice { background: var(--note); border-left: 3px solid var(--note-line); padding: 10px 16px; border-radius: 0 6px 6px 0; font-size: 14.5px; margin-bottom: 36px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin: 16px 0 8px; }
+  .card { display: block; border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; color: var(--text); background: var(--bg); transition: border-color .15s, transform .15s; }
+  .card:hover { border-color: var(--accent); text-decoration: none; transform: translateY(-1px); }
+  .card b { display: block; font-family: var(--serif); font-size: 17px; margin-bottom: 4px; }
+  .card span { font-size: 13.5px; color: var(--muted); line-height: 1.6; display: block; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 10px; margin: 16px 0; overflow: hidden; }
+  .facts div { padding: 14px 16px; border-right: 1px solid var(--line); }
+  .facts div:last-child { border-right: 0; }
+  .facts b { display: block; font-family: var(--serif); font-size: 26px; font-variant-numeric: tabular-nums; line-height: 1.2; }
+  .facts span { font-size: 12.5px; color: var(--muted); }
+
+  /* 온톨로지 */
+  .onto-toolbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 18px 0 10px; }
+  .onto-button { border: 1px solid var(--line); background: var(--bg); color: var(--text); border-radius: 999px; padding: 4px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+  .onto-button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .onto-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-left: auto; font-size: 12px; color: var(--muted); }
+  .onto-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 4px; }
+  .onto-graph { height: 600px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+  .onto-detail { border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin-top: 12px; font-size: 14.5px; }
+  .onto-detail h3 { margin-top: 0; }
+  .onto-detail h4 { margin: 14px 0 2px; font-size: 12.5px; }
+  .onto-hint, .onto-small, .onto-meta { color: var(--muted); font-size: 13px; }
+  .onto-planned { border-left: 3px solid var(--note-line); padding-left: 10px; }
+  .onto-wide { max-width: 980px; }
+
+  /* 오른쪽: 이 쪽의 목차 */
+  .toc { padding: 52px 20px 40px 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; font-size: 13px; }
+  .toc h5 { margin: 0 0 8px; font-size: 11px; color: var(--muted); letter-spacing: 0.08em; font-weight: 600; }
+  .toc a { display: block; padding: 3px 0 3px 12px; color: var(--muted); border-left: 2px solid var(--line); line-height: 1.5; }
+  .toc a.h3 { padding-left: 24px; }
+  .toc a:hover { color: var(--accent); border-left-color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 1100px) { .layout { grid-template-columns: 240px minmax(0, 1fr); } .toc { display: none; } }
+  @media (max-width: 760px) {
+    .layout { display: block; }
+    .side { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 18px 16px; }
+    main { padding: 24px 16px 64px; }
+    .doc h1 { font-size: 27px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="side">
+    <a class="brand" href="#/">mini-erp-mes<small>사출성형 공장의 미니 ERP/MES와 운영 에이전트</small></a>
+    <div class="search">
+      <input id="q" type="search" placeholder="문서 검색" autocomplete="off">
+      <div class="results" id="results" hidden></div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="side-foot">
+      <button id="theme" type="button">밝게 / 어둡게</button>
+      <p>모든 데이터는 시뮬레이터가 만든 생성 데이터입니다.</p>
+    </div>
+  </aside>
+  <main><article class="doc" id="doc"></article></main>
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<template id="home">
+  <h1>mini-erp-mes</h1>
+  <p class="lead">가상의 자동차 외장 플라스틱 부품 협력사를 대상으로 한 미니 ERP/MES와 운영 에이전트입니다. 사출성형으로 성형품을 찍어 내고, 조립해서 출하하는 공장을 다룹니다.</p>
+  <div class="notice">모든 데이터는 시뮬레이터가 만든 생성 데이터입니다. 실제 공장의 데이터가 아닙니다.</div>
+
+  <div class="facts">
+    <div><b data-value="erd.tables"></b><span>테이블</span></div>
+    <div><b data-value="ontology.objects"></b><span>온톨로지 객체</span></div>
+    <div><b data-value="ontology.relations"></b><span>객체 사이의 관계</span></div>
+    <div><b data-value="ontology.tools"></b><span>에이전트의 도구</span></div>
+  </div>
+
+  <h2>무엇을 하는가</h2>
+  <ol>
+    <li>고객의 주문을 받아, 재고를 먼저 보고 모자란 만큼만 생산을 계획합니다.</li>
+    <li>설비 20대가 사이클마다 보내는 메시지를 받아 생산실적과 재고로 만듭니다.</li>
+    <li>운영 에이전트가 "어제 3호기 불량이 왜 늘었나"에 답하고, 작업지시의 일정 변경을 제안합니다. 변경은 사람이 승인해야 실행됩니다.</li>
+  </ol>
+
+  <h2>어디부터 읽나</h2>
+  <div class="cards">
+    <a class="card" href="#/factory-flow"><b>공장 흐름</b><span>주문 하나를 수주부터 출하까지 따라갑니다.</span></a>
+    <a class="card" href="#/ontology"><b>온톨로지</b><span>같은 개념이 DB, API, 도구, 메시지에서 각각 무엇인지 눌러 봅니다.</span></a>
+    <a class="card" href="#/contracts"><b>계층 사이 계약</b><span>구성 요소들이 무엇을 주고받는지의 목록입니다.</span></a>
+    <a class="card" href="#/glossary"><b>용어집</b><span>사출성형과 ERP/MES의 용어. 줄마다 출처를 적었습니다.</span></a>
+  </div>
+
+  <h2>구성</h2>
+  <pre><code class="language-mermaid">flowchart LR
+    sim[시뮬레이터&lt;br&gt;설비 20대] -- MQTT --&gt; mq[(RabbitMQ)]
+    mq -- AMQP 대기열 --&gt; core[core&lt;br&gt;Kotlin, Spring, MyBatis]
+    core --- db[(Oracle)]
+    core -- SSE --&gt; web[화면&lt;br&gt;React, Canvas]
+    agent[운영 에이전트&lt;br&gt;Python, LangGraph] -- MCP 도구 --&gt; core
+    web -- 대화 --&gt; agent</code></pre>
+  <p>에이전트는 DB에 직접 닿지 않고 core의 도구만 부릅니다. 화면은 core가 흘려보내는 것만 그립니다.</p>
+</template>
+
+<template id="ontology">
+  <div class="onto-wide">
+  <h1>온톨로지</h1>
+  <p>작업지시 같은 개념 하나는 DB의 테이블, core의 API, 에이전트의 도구, 설비와 주고받는 메시지, 화면으로 가는 이벤트에 각각 다른 이름으로 나타납니다. 온톨로지는 그 대응을 한곳에 적어 둔 파일이고, 이 그림은 그 파일에서 자동으로 만들어집니다.</p>
+  <div class="onto-toolbar" id="onto-toolbar"></div>
+  <div id="onto-graph" class="onto-graph"></div>
+  <p class="onto-meta" id="onto-meta"></p>
+  <div id="onto-detail" class="onto-detail"><p class="onto-hint">객체를 눌러 보세요.</p></div>
+  <h2 id="행위">행위</h2>
+  <div id="onto-actions"></div>
+  <h2 id="메시지">메시지</h2>
+  <div id="onto-messages"></div>
+  </div>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/18.3.0/lib/marked.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/12.3.0/mermaid.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.35.0/cytoscape.min.js"></script>
+<script>
+// 목차와 숫자는 build.py 가 만든 data/site.json 에서 온다. 마크다운 쪽은 file, 직접 쓴 쪽은 template 을 가진다.
+var NAV = [], PAGES = [], VALUES = {};
+var doc = document.getElementById("doc");
+var toc = document.getElementById("toc");
+var cache = {};
+
+mermaid.initialize({ startOnLoad: false, theme: "neutral", securityLevel: "loose" });
+
+function load(page) {
+  if (cache[page.file]) return Promise.resolve(cache[page.file]);
+  return fetch(page.file).then(function (r) {
+    if (!r.ok) throw new Error(page.file + " 응답 " + r.status);
+    return r.text();
+  }).then(function (text) { cache[page.file] = text; return text; });
+}
+
+function slug(text) { return text.trim().replace(/[^\w가-힣 -]/g, "").replace(/\s+/g, "-"); }
+
+function decorate(page) {
+  // 표는 좁은 화면에서 옆으로 밀 수 있게 감싼다
+  doc.querySelectorAll("table").forEach(function (t) {
+    var wrap = document.createElement("div"); wrap.className = "table-wrap";
+    t.parentNode.insertBefore(wrap, t); wrap.appendChild(t);
+  });
+  // 제목에 닻을 달고 오른쪽 목차를 만든다
+  toc.innerHTML = "";
+  var heads = doc.querySelectorAll("h2, h3");
+  if (heads.length > 1) {
+    var label = document.createElement("h5"); label.textContent = "이 쪽에서"; toc.appendChild(label);
+  }
+  heads.forEach(function (h) {
+    if (!h.id) h.id = slug(h.textContent);
+    var a = document.createElement("a");
+    a.textContent = h.textContent; a.className = h.tagName.toLowerCase();
+    a.href = "#/" + page.id + "?" + encodeURIComponent(h.id);
+    // 쪽을 다시 그리지 않고 그 자리로 옮긴다. 주소는 복사해 갈 수 있게 바꿔 둔다.
+    a.addEventListener("click", function (e) { e.preventDefault(); history.replaceState(null, "", a.href); h.scrollIntoView(); });
+    if (heads.length > 1) toc.appendChild(a);
+  });
+  // mermaid 코드 블록을 그림으로 바꾼다
+  var blocks = [];
+  doc.querySelectorAll("pre > code.language-mermaid").forEach(function (code) {
+    var box = document.createElement("div"); box.className = "mermaid"; box.textContent = code.textContent;
+    code.parentNode.replaceWith(box); blocks.push(box);
+  });
+  // 그림이 그려지면 쪽의 길이가 바뀐다. 다 그린 뒤에 제목의 자리로 가도록 끝나는 때를 알려 준다.
+  return blocks.length ? mermaid.run({ nodes: blocks }).catch(function (error) { console.error(error); }) : Promise.resolve();
+}
+
+var visit = 0;
+
+// 주소는 #/쪽?제목 모양이다. 깨진 주소면 홈으로 간다.
+function route() {
+  try {
+    var parts = location.hash.replace(/^#\/?/, "").split("?");
+    return { id: decodeURIComponent(parts[0]), anchor: parts[1] ? decodeURIComponent(parts[1]) : null };
+  } catch (error) {
+    return { id: "", anchor: null };
+  }
+}
+
+function settle(anchor) {
+  var target = anchor && document.getElementById(anchor);
+  if (target) target.scrollIntoView(); else window.scrollTo(0, 0);
+}
+
+function show() {
+  var here = route();
+  var mine = ++visit;
+  if (window.closeOntology) window.closeOntology();
+  var page = PAGES.filter(function (p) { return p.id === here.id; })[0] || PAGES[0];
+  document.querySelectorAll("#nav a").forEach(function (a) { a.classList.toggle("on", a.dataset.id === page.id); });
+  document.title = (page.id ? page.title + " | " : "") + "mini-erp-mes 문서";
+
+  if (page.template) {
+    doc.innerHTML = "";
+    doc.appendChild(document.getElementById(page.template).content.cloneNode(true));
+    doc.querySelectorAll("[data-value]").forEach(function (node) {
+      node.textContent = node.dataset.value.split(".").reduce(function (value, key) { return value == null ? value : value[key]; }, VALUES);
+    });
+    decorate(page).then(function () { if (mine === visit) settle(here.anchor); });
+    if (page.script) {
+      // 그래프 스크립트는 한 번만 받고, 올 때마다 다시 그린다.
+      if (window.openOntology) window.openOntology("data/ontology.json");
+      else {
+        var s = document.createElement("script"); s.src = page.script;
+        s.onload = function () { if (mine === visit) window.openOntology("data/ontology.json"); };
+        document.head.appendChild(s);
+      }
+    }
+    return;
+  }
+  load(page).then(function (text) {
+    // 받는 사이에 다른 쪽으로 넘어갔으면 그리지 않는다.
+    if (mine !== visit) return;
+    doc.innerHTML = marked.parse(text);
+    var source = document.createElement("p"); source.className = "source";
+    if (!page.site_only) {
+      source.textContent = "원본: " + page.source + ". 이 쪽은 저장소의 원본을 그대로 보여 줍니다.";
+      doc.appendChild(source);
+    }
+    return decorate(page).then(function () { if (mine === visit) settle(here.anchor); });
+  }).catch(function (error) {
+    if (mine === visit) doc.textContent = "쪽을 불러오지 못했습니다: " + error.message;
+  });
+}
+
+// 왼쪽 목차
+var nav = document.getElementById("nav");
+function drawNav() {
+  NAV.forEach(function (g) {
+    if (g.group) { var h = document.createElement("h4"); h.textContent = g.group; nav.appendChild(h); }
+    g.pages.forEach(function (p) {
+      var a = document.createElement("a"); a.href = "#/" + p.id; a.textContent = p.title; a.dataset.id = p.id; nav.appendChild(a);
+    });
+  });
+}
+
+// 검색: 처음 칸에 들어갈 때 마크다운 쪽을 모두 받아 두고 글자로 찾는다
+var q = document.getElementById("q"), results = document.getElementById("results");
+function textOf(page) {
+  if (page.file) return load(page).catch(function () { return ""; });
+  return Promise.resolve(document.getElementById(page.template).content.textContent);
+}
+var corpus = null;
+function gather() {
+  if (!corpus) corpus = Promise.all(PAGES.map(textOf));
+  return corpus;
+}
+q.addEventListener("focus", gather);
+q.addEventListener("input", function () {
+  gather().then(function (texts) { find(texts); });
+});
+function find(texts) {
+  var word = q.value.trim().toLowerCase();
+  results.innerHTML = "";
+  if (word.length < 2) { results.hidden = true; return; }
+  var found = 0;
+  PAGES.forEach(function (p, index) {
+    texts[index].split("\n").forEach(function (line) {
+      if (found >= 12 || line.toLowerCase().indexOf(word) < 0) return;
+      var a = document.createElement("a"); a.href = "#/" + p.id; a.textContent = p.title;
+      var s = document.createElement("small"); s.textContent = line.replace(/[#|*`>]/g, " ").trim(); a.appendChild(s);
+      a.addEventListener("click", function () {
+        results.hidden = true; q.value = "";
+        // 지금 보고 있는 쪽이면 주소가 바뀌지 않으므로 직접 맨 위로 올린다.
+        if (route().id === p.id) window.scrollTo(0, 0);
+      });
+      results.appendChild(a); found++;
+    });
+  });
+  results.hidden = found === 0;
+}
+document.addEventListener("click", function (e) { if (!e.target.closest(".search")) results.hidden = true; });
+
+// 밝게, 어둡게
+document.getElementById("theme").addEventListener("click", function () {
+  var root = document.documentElement;
+  var dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+});
+
+fetch("data/site.json")
+  .then(function (r) {
+    if (!r.ok) throw new Error("data/site.json 응답 " + r.status);
+    return r.json();
+  })
+  .then(function (site) {
+    NAV = site.nav; VALUES = site.values;
+    PAGES = NAV.reduce(function (all, g) { return all.concat(g.pages); }, []);
+    drawNav();
+    window.addEventListener("hashchange", show);
+    show();
+  })
+  .catch(function (error) { doc.textContent = "사이트의 목차를 불러오지 못했습니다: " + error.message; });
+</script>
+</body>
+</html>

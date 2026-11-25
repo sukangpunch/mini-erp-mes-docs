@@ -1,0 +1,116 @@
+{
+ "nav": [
+  {
+   "group": null,
+   "pages": [
+    {
+     "id": "",
+     "title": "홈",
+     "template": "home"
+    }
+   ]
+  },
+  {
+   "group": "도메인",
+   "pages": [
+    {
+     "id": "factory-flow",
+     "title": "공장 흐름",
+     "source": "docs/domain/factory-flow.md",
+     "file": "pages/factory-flow.md"
+    },
+    {
+     "id": "glossary",
+     "title": "용어집",
+     "source": "docs/domain/glossary.md",
+     "file": "pages/glossary.md"
+    }
+   ]
+  },
+  {
+   "group": "규격",
+   "pages": [
+    {
+     "id": "ontology",
+     "title": "온톨로지",
+     "template": "ontology",
+     "script": "ontology-graph.js"
+    },
+    {
+     "id": "contracts",
+     "title": "계층 사이 계약",
+     "source": "ontology/contracts.md",
+     "file": "pages/contracts.md"
+    },
+    {
+     "id": "data-model",
+     "title": "데이터 모델",
+     "source": "docs-site/pages/data-model.md",
+     "site_only": true,
+     "file": "pages/data-model.md"
+    },
+    {
+     "id": "erd-decisions",
+     "title": "ERD 설계 이유",
+     "source": "docs/design/erd-decisions.md",
+     "file": "pages/erd-decisions.md"
+    }
+   ]
+  },
+  {
+   "group": "만드는 방식",
+   "pages": [
+    {
+     "id": "architecture",
+     "title": "아키텍처",
+     "source": "docs-site/pages/architecture.md",
+     "site_only": true,
+     "file": "pages/architecture.md"
+    },
+    {
+     "id": "harness",
+     "title": "개발 방식",
+     "source": "docs-site/pages/harness.md",
+     "site_only": true,
+     "file": "pages/harness.md"
+    },
+    {
+     "id": "records",
+     "title": "기록",
+     "source": "docs/records/README.md",
+     "file": "pages/records.md"
+    },
+    {
+     "id": "status",
+     "title": "구현 상태",
+     "generated": "status",
+     "file": "pages/status.md",
+     "site_only": true
+    },
+    {
+     "id": "progress",
+     "title": "진행 상황",
+     "source": "docs/plan/progress.md",
+     "file": "pages/progress.md"
+    }
+   ]
+  }
+ ],
+ "values": {
+  "erd": {
+   "tables": 28,
+   "groups": {
+    "master": 12,
+    "sales_and_planning": 5,
+    "execution": 5,
+    "material_and_stock": 6
+   },
+   "group_count": 4
+  },
+  "ontology": {
+   "objects": 24,
+   "relations": 52,
+   "tools": 15
+  }
+ }
+}
