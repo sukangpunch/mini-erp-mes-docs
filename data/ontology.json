@@ -23,7 +23,8 @@
     "item",
     "bom",
     "item_replenishment"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "Line",
@@ -48,7 +49,8 @@
    "sse": [],
    "built_tables": [
     "line"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "Equipment",
@@ -76,7 +78,8 @@
    ],
    "built_tables": [
     "equipment"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "Mold",
@@ -99,7 +102,8 @@
    "built_tables": [
     "mold",
     "mold_equipment"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "WorkCalendar",
@@ -120,7 +124,8 @@
    "built_tables": [
     "shift",
     "work_calendar"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "Customer",
@@ -139,7 +144,8 @@
    "sse": [],
    "built_tables": [
     "customer"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "Supplier",
@@ -158,7 +164,8 @@
    "sse": [],
    "built_tables": [
     "supplier"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "SalesOrder",
@@ -186,6 +193,11 @@
    "built_tables": [
     "sales_order",
     "sales_order_line"
+   ],
+   "built_apis": [
+    "GET /api/sales-orders",
+    "GET /api/sales-orders/{orderNo}",
+    "POST /api/sales-orders"
    ]
   },
   {
@@ -208,7 +220,8 @@
    "sse": [],
    "built_tables": [
     "stock_reservation"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "ProductionOrder",
@@ -230,7 +243,8 @@
    "sse": [],
    "built_tables": [
     "production_order"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "WorkOrder",
@@ -260,7 +274,8 @@
    ],
    "built_tables": [
     "work_order"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "EquipmentStatus",
@@ -287,7 +302,8 @@
    ],
    "built_tables": [
     "equipment_status_log"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "Cycle",
@@ -310,7 +326,8 @@
    "sse": [],
    "built_tables": [
     "cycle_log"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "Telemetry",
@@ -337,7 +354,8 @@
    ],
    "built_tables": [
     "equipment_telemetry_1m"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "DefectRecord",
@@ -366,7 +384,8 @@
    "built_tables": [
     "defect_record",
     "defect_type"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "ProductionResult",
@@ -392,7 +411,8 @@
    ],
    "built_tables": [
     "production_result"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "PurchaseOrder",
@@ -411,7 +431,8 @@
    "sse": [],
    "built_tables": [
     "purchase_order"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "MaterialLot",
@@ -432,7 +453,8 @@
    "sse": [],
    "built_tables": [
     "material_lot"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "MaterialCharge",
@@ -455,7 +477,8 @@
    "sse": [],
    "built_tables": [
     "material_charge"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "Stock",
@@ -482,7 +505,8 @@
    "built_tables": [
     "stock_balance",
     "stock_movement"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "Shipment",
@@ -503,7 +527,8 @@
    "sse": [],
    "built_tables": [
     "shipment"
-   ]
+   ],
+   "built_apis": []
   },
   {
    "id": "ChangeRequest",
@@ -528,7 +553,8 @@
    "sse": [
     "change-request.updated"
    ],
-   "built_tables": []
+   "built_tables": [],
+   "built_apis": []
   },
   {
    "id": "Document",
@@ -545,7 +571,8 @@
    ],
    "mqtt": [],
    "sse": [],
-   "built_tables": []
+   "built_tables": [],
+   "built_apis": []
   },
   {
    "id": "Incident",
@@ -562,7 +589,8 @@
    "mcp_tools": [],
    "mqtt": [],
    "sse": [],
-   "built_tables": []
+   "built_tables": [],
+   "built_apis": []
   }
  ],
  "edges": [

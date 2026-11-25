@@ -168,8 +168,8 @@
       LAYERS.forEach(function (layer) {
         if (node[layer.key].length === 0) return;
         detail.appendChild(el("h4", { text: layer.label }));
-        // 테이블은 스키마 파일에 실제로 있는지를 함께 보여 준다 (build.py 가 확인한다).
-        var built = layer.key === "tables" ? node.built_tables || [] : null;
+        // 테이블과 API 는 코드에 실제로 있는지를 함께 보여 준다 (build.py 가 확인한다).
+        var built = layer.key === "tables" ? node.built_tables || [] : layer.key === "api" ? node.built_apis || [] : null;
         detail.appendChild(list(node[layer.key].map(function (item) {
           return built ? item + (built.indexOf(item) >= 0 ? "  (만들어짐)" : "  (아직)") : item;
         })));
