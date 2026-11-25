@@ -536,7 +536,7 @@ ISO 9001과 IATF 16949가 추적성을 요구한다는 것은 컨설팅 회사�
 
 | 개념 | 현실의 ERP, MES, SAP에서는 | 이 프로젝트에서는 |
 | --- | --- | --- |
-| 수주 | 판매오더가 MRP의 소요로 잡힙니다 | `sales_order`와 `sales_order_line`입니다. 수주는 머리와 줄로 나뉩니다 |
+| 수주 | 판매오더가 MRP의 소요로 잡힙니다 | `sales_order`와 `sales_order_line`입니다. 수주는 머리와 줄로 나뉩니다. 번호는 우리 쪽 수주번호(`order_no`)와 고객 발주번호(`customer_po_no`) 둘입니다 |
 | 생산오더 | MRP가 계획오더를 만들고 그것이 생산오더로 전환됩니다 | 계획오더 단계가 없습니다. 계획 배치가 수주 줄 하나에서 `production_order`를 바로 만듭니다 |
 | 작업지시 | 생산오더가 MES로 내려가 설비와 시간에 배정됩니다 | `work_order`입니다. 하루 단위이고, 설비와 금형을 가리킵니다. 양품이 모자라면 같은 생산오더에 작업지시를 더 붙입니다 |
 | 마스터 데이터 | 자재 마스터, BOM, work center, routing | `item`, `bom`, `line`, `equipment`, `mold`, `mold_equipment`입니다. routing 테이블은 없고, `mold_equipment`의 표준 사이클 타임이 표준 시간의 역할을 합니다. 금형은 독립된 테이블이고 캐비티 수를 가집니다 |

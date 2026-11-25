@@ -742,35 +742,39 @@
 <!-- sales_order -->
 <g id="sales_order" class="node">
 <title>sales_order</title>
-<g id="a_sales_order"><a xlink:title="sales_order&#10;주문서의 머리. 누가 언제 주문했는가">
-<ellipse fill="none" stroke="black" stroke-width="0" cx="3498.25" cy="-5494.45" rx="270.23" ry="214.92"/>
-<polygon fill="#1d71b8" stroke="transparent" points="3309.25,-5584.45 3309.25,-5644.45 3687.25,-5644.45 3687.25,-5584.45 3309.25,-5584.45"/>
-<polygon fill="none" stroke="#29235c" points="3309.25,-5584.45 3309.25,-5644.45 3687.25,-5644.45 3687.25,-5584.45 3309.25,-5584.45"/>
-<text text-anchor="start" x="3352.43" y="-5605.65" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="32.00" fill="#ffffff"> &#160;&#160;&#160;&#160;&#160;&#160;sales_order &#160;&#160;&#160;&#160;&#160;&#160;</text>
-<polygon fill="#e7e2dd" stroke="transparent" points="3309.25,-5524.45 3309.25,-5584.45 3687.25,-5584.45 3687.25,-5524.45 3309.25,-5524.45"/>
-<polygon fill="none" stroke="#29235c" points="3309.25,-5524.45 3309.25,-5584.45 3687.25,-5584.45 3687.25,-5524.45 3309.25,-5524.45"/>
-<text text-anchor="start" x="3320.25" y="-5545.65" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="32.00" fill="#29235c">sales_order_id</text>
-<text text-anchor="start" x="3530.07" y="-5545.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c"> &#160;&#160;&#160;</text>
-<text text-anchor="start" x="3567.79" y="-5545.65" font-family="Helvetica,sans-Serif" font-style="italic" font-size="32.00" fill="#29235c">number</text>
-<polygon fill="#e7e2dd" stroke="transparent" points="3309.25,-5464.45 3309.25,-5524.45 3687.25,-5524.45 3687.25,-5464.45 3309.25,-5464.45"/>
-<polygon fill="none" stroke="#29235c" points="3309.25,-5464.45 3309.25,-5524.45 3687.25,-5524.45 3687.25,-5464.45 3309.25,-5464.45"/>
-<text text-anchor="start" x="3320.25" y="-5484.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">order_no &#160;&#160;&#160;</text>
-<text text-anchor="start" x="3585.59" y="-5485.65" font-family="Helvetica,sans-Serif" font-style="italic" font-size="32.00" fill="#29235c">text</text>
-<text text-anchor="start" x="3637.16" y="-5485.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c"> </text>
-<text text-anchor="start" x="3646.05" y="-5485.65" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="32.00" fill="#29235c">(!)</text>
-<polygon fill="#e7e2dd" stroke="transparent" points="3309.25,-5404.45 3309.25,-5464.45 3687.25,-5464.45 3687.25,-5404.45 3309.25,-5404.45"/>
-<polygon fill="none" stroke="#29235c" points="3309.25,-5404.45 3309.25,-5464.45 3687.25,-5464.45 3687.25,-5404.45 3309.25,-5404.45"/>
-<text text-anchor="start" x="3319.84" y="-5424.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">customer_id &#160;&#160;&#160;</text>
-<text text-anchor="start" x="3528.98" y="-5425.65" font-family="Helvetica,sans-Serif" font-style="italic" font-size="32.00" fill="#29235c">number</text>
-<text text-anchor="start" x="3637.44" y="-5425.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c"> </text>
-<text text-anchor="start" x="3646.33" y="-5425.65" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="32.00" fill="#29235c">(!)</text>
-<polygon fill="#e7e2dd" stroke="transparent" points="3309.25,-5344.45 3309.25,-5404.45 3687.25,-5404.45 3687.25,-5344.45 3309.25,-5344.45"/>
-<polygon fill="none" stroke="#29235c" points="3309.25,-5344.45 3309.25,-5404.45 3687.25,-5404.45 3687.25,-5344.45 3309.25,-5344.45"/>
-<text text-anchor="start" x="3320.25" y="-5364.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">ordered_at &#160;&#160;&#160;</text>
-<text text-anchor="start" x="3514.47" y="-5365.65" font-family="Helvetica,sans-Serif" font-style="italic" font-size="32.00" fill="#29235c">datetime</text>
-<text text-anchor="start" x="3637.16" y="-5365.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c"> </text>
-<text text-anchor="start" x="3646.05" y="-5365.65" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="32.00" fill="#29235c">(!)</text>
-<polygon fill="none" stroke="#29235c" stroke-width="2" points="3308.25,-5343.45 3308.25,-5645.45 3688.25,-5645.45 3688.25,-5343.45 3308.25,-5343.45"/>
+<g id="a_sales_order"><a xlink:title="sales_order&#10;주문서의 머리. 누가 언제 주문했는가. 번호는 우리 쪽 수주번호와 고객 발주번호 둘이다">
+<ellipse fill="none" stroke="black" stroke-width="0" cx="3498.25" cy="-5500.45" rx="270.23" ry="257.27"/>
+<polygon fill="#1d71b8" stroke="transparent" points="3309.25,-5620.45 3309.25,-5680.45 3687.25,-5680.45 3687.25,-5620.45 3309.25,-5620.45"/>
+<polygon fill="none" stroke="#29235c" points="3309.25,-5620.45 3309.25,-5680.45 3687.25,-5680.45 3687.25,-5620.45 3309.25,-5620.45"/>
+<text text-anchor="start" x="3352.43" y="-5641.65" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="32.00" fill="#ffffff"> &#160;&#160;&#160;&#160;&#160;&#160;sales_order &#160;&#160;&#160;&#160;&#160;&#160;</text>
+<polygon fill="#e7e2dd" stroke="transparent" points="3309.25,-5560.45 3309.25,-5620.45 3687.25,-5620.45 3687.25,-5560.45 3309.25,-5560.45"/>
+<polygon fill="none" stroke="#29235c" points="3309.25,-5560.45 3309.25,-5620.45 3687.25,-5620.45 3687.25,-5560.45 3309.25,-5560.45"/>
+<text text-anchor="start" x="3320.25" y="-5581.65" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="32.00" fill="#29235c">sales_order_id</text>
+<text text-anchor="start" x="3530.07" y="-5581.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c"> &#160;&#160;&#160;</text>
+<text text-anchor="start" x="3567.79" y="-5581.65" font-family="Helvetica,sans-Serif" font-style="italic" font-size="32.00" fill="#29235c">number</text>
+<polygon fill="#e7e2dd" stroke="transparent" points="3309.25,-5500.45 3309.25,-5560.45 3687.25,-5560.45 3687.25,-5500.45 3309.25,-5500.45"/>
+<polygon fill="none" stroke="#29235c" points="3309.25,-5500.45 3309.25,-5560.45 3687.25,-5560.45 3687.25,-5500.45 3309.25,-5500.45"/>
+<text text-anchor="start" x="3320.25" y="-5520.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">order_no &#160;&#160;&#160;</text>
+<text text-anchor="start" x="3585.59" y="-5521.65" font-family="Helvetica,sans-Serif" font-style="italic" font-size="32.00" fill="#29235c">text</text>
+<text text-anchor="start" x="3637.16" y="-5521.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c"> </text>
+<text text-anchor="start" x="3646.05" y="-5521.65" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="32.00" fill="#29235c">(!)</text>
+<polygon fill="#e7e2dd" stroke="transparent" points="3309.25,-5440.45 3309.25,-5500.45 3687.25,-5500.45 3687.25,-5440.45 3309.25,-5440.45"/>
+<polygon fill="none" stroke="#29235c" points="3309.25,-5440.45 3309.25,-5500.45 3687.25,-5500.45 3687.25,-5440.45 3309.25,-5440.45"/>
+<text text-anchor="start" x="3319.84" y="-5460.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">customer_id &#160;&#160;&#160;</text>
+<text text-anchor="start" x="3528.98" y="-5461.65" font-family="Helvetica,sans-Serif" font-style="italic" font-size="32.00" fill="#29235c">number</text>
+<text text-anchor="start" x="3637.44" y="-5461.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c"> </text>
+<text text-anchor="start" x="3646.33" y="-5461.65" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="32.00" fill="#29235c">(!)</text>
+<polygon fill="#e7e2dd" stroke="transparent" points="3309.25,-5380.45 3309.25,-5440.45 3687.25,-5440.45 3687.25,-5380.45 3309.25,-5380.45"/>
+<polygon fill="none" stroke="#29235c" points="3309.25,-5380.45 3309.25,-5440.45 3687.25,-5440.45 3687.25,-5380.45 3309.25,-5380.45"/>
+<text text-anchor="start" x="3320.25" y="-5400.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">customer_po_no &#160;&#160;&#160;</text>
+<text text-anchor="start" x="3624.68" y="-5401.65" font-family="Helvetica,sans-Serif" font-style="italic" font-size="32.00" fill="#29235c">text</text>
+<polygon fill="#e7e2dd" stroke="transparent" points="3309.25,-5320.45 3309.25,-5380.45 3687.25,-5380.45 3687.25,-5320.45 3309.25,-5320.45"/>
+<polygon fill="none" stroke="#29235c" points="3309.25,-5320.45 3309.25,-5380.45 3687.25,-5380.45 3687.25,-5320.45 3309.25,-5320.45"/>
+<text text-anchor="start" x="3320.25" y="-5340.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">ordered_at &#160;&#160;&#160;</text>
+<text text-anchor="start" x="3514.47" y="-5341.65" font-family="Helvetica,sans-Serif" font-style="italic" font-size="32.00" fill="#29235c">datetime</text>
+<text text-anchor="start" x="3637.16" y="-5341.65" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c"> </text>
+<text text-anchor="start" x="3646.05" y="-5341.65" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="32.00" fill="#29235c">(!)</text>
+<polygon fill="none" stroke="#29235c" stroke-width="2" points="3308.25,-5319.45 3308.25,-5681.45 3688.25,-5681.45 3688.25,-5319.45 3308.25,-5319.45"/>
 </a>
 </g>
 </g>
@@ -778,10 +782,10 @@
 <!-- sales_order&#45;&gt;customer -->
 <g id="edge20" class="edge">
 <title>sales_order:e&#45;&gt;customer:w</title>
-<path fill="none" stroke="#29235c" stroke-width="3" d="M3688.25,-5434.45C3757.12,-5434.45 3730.13,-5333.39 3687.25,-5279.49 3537.58,-5091.34 3314.62,-5339.35 3160.96,-5154.45 3120.57,-5105.85 3178.05,-4630.72 3132.96,-4586.45 3079.28,-4533.74 1832.06,-4598.37 1779.49,-4544.56 1741.6,-4505.78 1723.05,-4425.36 1768.53,-4415.46"/>
+<path fill="none" stroke="#29235c" stroke-width="3" d="M3688.25,-5470.45C3789.31,-5470.45 3752.68,-5320.08 3687.25,-5243.06 3533.68,-5062.28 3318.54,-5331.74 3160.96,-5154.45 3118.98,-5107.22 3178.05,-4630.72 3132.96,-4586.45 3079.28,-4533.74 1832.06,-4598.37 1779.49,-4544.56 1741.6,-4505.78 1723.05,-4425.36 1768.53,-4415.46"/>
 <polygon fill="#29235c" stroke="#29235c" stroke-width="3" points="1768.89,-4418.94 1778.49,-4414.45 1768.19,-4411.97 1768.89,-4418.94"/>
 <text text-anchor="middle" x="1769.6" y="-4424.05" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">1</text>
-<text text-anchor="middle" x="3694.47" y="-5444.05" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">*</text>
+<text text-anchor="middle" x="3694.47" y="-5480.05" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">*</text>
 </g>
 <!-- sales_order_line -->
 <g id="sales_order_line" class="node">
@@ -854,9 +858,9 @@
 <!-- sales_order_line&#45;&gt;sales_order -->
 <g id="edge22" class="edge">
 <title>sales_order_line:e&#45;&gt;sales_order:w</title>
-<path fill="none" stroke="#29235c" stroke-width="3" d="M2984.92,-5670.45C3134.16,-5670.45 3154.71,-5559.6 3298.16,-5554.62"/>
-<polygon fill="#29235c" stroke="#29235c" stroke-width="3" points="3298.31,-5558.12 3308.25,-5554.45 3298.19,-5551.12 3298.31,-5558.12"/>
-<text text-anchor="middle" x="3317.15" y="-5564.05" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">1</text>
+<path fill="none" stroke="#29235c" stroke-width="3" d="M2984.92,-5670.45C3129.49,-5670.45 3158.87,-5594.16 3298.04,-5590.58"/>
+<polygon fill="#29235c" stroke="#29235c" stroke-width="3" points="3298.3,-5594.08 3308.25,-5590.45 3298.21,-5587.08 3298.3,-5594.08"/>
+<text text-anchor="middle" x="3317.15" y="-5600.05" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">1</text>
 <text text-anchor="middle" x="2978.7" y="-5680.05" font-family="Helvetica,sans-Serif" font-size="32.00" fill="#29235c">*</text>
 </g>
 <!-- stock_reservation -->
@@ -1154,7 +1158,7 @@
 <!-- equipment_status_log -->
 <g id="equipment_status_log" class="node">
 <title>equipment_status_log</title>
-<g id="a_equipment_status_log"><a xlink:title="equipment_status_log&#10;설비가 언제부터 언제까지 어떤 상태였는가. 가동률의 근거">
+<g id="a_equipment_status_log"><a xlink:title="equipment_status_log&#10;설비가 언제부터 언제까지 어떤 상태였는가. 시간가동률의 근거">
 <ellipse fill="none" stroke="black" stroke-width="0" cx="408.44" cy="-6189.45" rx="371.46" ry="384.83"/>
 <polygon fill="#1d71b8" stroke="transparent" points="148.44,-6399.45 148.44,-6459.45 669.44,-6459.45 669.44,-6399.45 148.44,-6399.45"/>
 <polygon fill="none" stroke="#29235c" points="148.44,-6399.45 148.44,-6459.45 669.44,-6459.45 669.44,-6399.45 148.44,-6399.45"/>
